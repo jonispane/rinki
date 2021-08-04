@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>VUE BE UI</title>
+  
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+ <div id="app">
+    <div class="container" style="margin: 12px">
+     
+  
+      <div class="container" style="margin: 12px" v-html="info.data.menu">
+      </div>
+      <div class="container" style="margin: 12px" v-html="info.data.response">
+      </div>
+      <transition name="fade" mode="out-in">
+      <div class="container" style="margin: 12px" v-html="info.data.cwork">
+      </div>
+      </transition>
+    </div>
+
+ </div>
+ 
+
+
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      const uip="vuebsui";
+      const queryString = window.location.search;
+      const url = "http://192.168.1.3:8080/uip/"+uip+"" + queryString;
+
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            info: null,
+          };
+        },
+        mounted() {
+          // setInterval(() => {
+          axios.get(url).then((response) => (this.info = response));
+          //  }, 1000)
+        },
+      });
+
+
+
+    </script>
+  </body>
+</html>
